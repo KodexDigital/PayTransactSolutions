@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PayTransact.Models.Models;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PayTransact.Controllers
 {
+    [AllowAnonymous]
     public class IdentityController : Controller
     {
         private readonly IUnitOfWork uow;
@@ -49,8 +51,10 @@ namespace PayTransact.Controllers
                 var identityRoleHelper = new IdentityRoleHelper(roleManager);
                 await identityRoleHelper.CreateNewRoleAsync(StaticConstants.CustomerRole);
                 await userManager.AddToRoleAsync(customerReg, StaticConstants.CustomerRole);
-                ViewBag.Success = "Registeration successful";
-                ModelState.Clear();
+
+                Microsoft.AspNetCore.Identity.SignInResult signInResult = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                if(signInResult.Succeeded)
+                    return RedirectToAction("Transaction", "Customers");
             }
 
             return View();
@@ -76,13 +80,10 @@ namespace PayTransact.Controllers
                         return Redirect(model.ReturnUrl ?? "/");
 
                     if (User.IsInRole(StaticConstants.CustomerRole))
-                        return RedirectToAction("Invest", "Customers");
+                        return RedirectToAction("Transaction", "Customers");
                     
                     if (User.IsInRole(StaticConstants.AdminRole))
                         return RedirectToAction("Index", "Admin");
-
-                    //else
-                    //    ViewBag.Error = "Please refresh your browser and try again";
                 }
                 else
                     ViewBag.Error = "Error encountered during login in!";

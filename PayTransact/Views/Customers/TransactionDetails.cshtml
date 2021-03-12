@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-6">
                         @{
-                            var customer = context.AppUsers.FirstOrDefault(c => c.Id.Equals(Model.CustomerId)).FirstName;
+                            var customer = context.AppUsers.FirstOrDefault(c => c.Id.Equals(Model.CustomerId)).FullName;
                         }
                         <input value="@customer" class="form-control" readonly />
                     </div>
@@ -41,7 +41,7 @@
                         Invested amount
                     </div>
                     <div class="col-md-6">
-                        <text>N</text><input asp-for="InvestedAmount" class="form-control" readonly />
+                        <input asp-for="InvestedAmount" class="form-control" readonly />
                     </div>
                 </div>
                 <div class="row mb-2">

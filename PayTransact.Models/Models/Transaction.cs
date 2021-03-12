@@ -19,7 +19,10 @@ namespace PayTransact.Models.Models
 
         public Transaction()
         {
-            TransactionNumber = string.Concat(Guid.NewGuid().ToString("N"), DateOfPayment.ToShortDateString());
+            var year = DateOfPayment.Year;
+            var month = DateOfPayment.Month;
+            var day = DateOfPayment.Day;
+            TransactionNumber = string.Concat(day,Guid.NewGuid().ToString("N"),year,month);
         }
     }
 }

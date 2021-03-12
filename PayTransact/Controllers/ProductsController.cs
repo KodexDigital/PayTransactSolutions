@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PayTransact.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PayTransact.Controllers
 {
+    [Authorize (Policy = "AdministratorRolePolicy")]
     public class ProductsController : Controller
     {
         private readonly IUnitOfWork uow;
@@ -22,10 +24,7 @@ namespace PayTransact.Controllers
 
         public IActionResult Index() => View(uow.ProductRepository.GetAll());
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]

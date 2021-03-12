@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace PayTransact.Controllers
 {
+    [Authorize (Roles = "Customer")]
     public class CustomersController : Controller
     {
         private readonly IUnitOfWork uow;
@@ -28,10 +30,7 @@ namespace PayTransact.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         public IActionResult Invest()
         {
@@ -63,7 +62,12 @@ namespace PayTransact.Controllers
             return View();
         }
 
-        public IActionResult Transaction() => View(uow.TransactionRepository.GetAll());
+        public async Task<IActionResult> Transaction() 
+        {
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var transactions = uow.TransactionRepository.GetAll(filter: u => u.CustomerId.Equals(user.Id));
+            return View(transactions);
+        }
         public IActionResult TransactionDetails(Guid Id) => View(uow.TransactionRepository.Get(Id));
         public async Task<IActionResult> Balance()
         {
