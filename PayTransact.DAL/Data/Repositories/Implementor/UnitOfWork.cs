@@ -15,12 +15,6 @@ namespace PayTransact.Persistence.Data.Repositories.Implementor
         public IProductRepository ProductRepository => new ProductRepository(dbContext);
         public IApplicationUserRepository ApplicationUserRepository => new ApplicationUserRepository(dbContext);
         public ITransactionRepository TransactionRepository => new TransactionRepository(dbContext);
-
-        public void Dispose()
-        {
-            dbContext.Dispose();
-        }
-
         public async Task SaveAsync()
         {
             await dbContext.SaveChangesAsync();

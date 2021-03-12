@@ -8,39 +8,38 @@
 }
 <link href="~/font-awesome/css/all.css" rel="stylesheet" />
 
-<div>
-    <input type="submit" id="btnExport" value="Export" />
-</div>
-<div id="Grid">
-    <table class="table table-dark table-striped" style="font-size:12px">
-        <thead>
-            <tr>
-                <th>
-                    Sn
-                </th>
-                <th>
-                    Customer name
-                </th>
-                <th>
-                    Invested amount
-                </th>
-                <th>
-                    Transaction number
-                </th>
-                <th>
-                    Date of payment
-                </th>
-                <th>
-                    Created date
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        @{ int sn = 0; }
-        @foreach (var item in Model)
-        {
-
-            if (Model.Count() > 0)
+@if (Model.Any() || Model.Count() > 0)
+{
+    <div>
+        <input type="submit" id="btnExport" value="Export" />
+    </div>
+    <div id="Grid">
+        <table class="table table-dark table-striped" style="font-size:12px">
+            <thead>
+                <tr>
+                    <th>
+                        Sn
+                    </th>
+                    <th>
+                        Customer name
+                    </th>
+                    <th>
+                        Invested amount
+                    </th>
+                    <th>
+                        Transaction number
+                    </th>
+                    <th>
+                        Date of payment
+                    </th>
+                    <th>
+                        Created date
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @{ int sn = 0; }
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -68,15 +67,16 @@
                         <a asp-action="TransactionDetails" asp-route-id="@item.Id" title="Details"><i class="fas fa-eye text-info h5"></i></a>
                     </td>
                 </tr>
+
             }
-            else
-            {
-                <tr>
-                    <td colspan="8">
-                        <div class="alert alert-danger">Your transaction list is empty. <a asp-action="Invest">Invest now</a></div>
-                    </td>
-                </tr>
-            }
-        }
-    </table>
-</div>
+        </table>
+    </div>
+}
+else
+{
+    <tr>
+        <td colspan="8">
+            <div class="alert alert-danger">Your transaction list is empty. <a asp-action="Invest">Invest now</a></div>
+        </td>
+    </tr>
+}

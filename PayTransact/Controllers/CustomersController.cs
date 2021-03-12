@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PayTransact.Models.Models;
 using PayTransact.Models.ViewModels;
+using PayTransact.Persistence.DAL;
 using PayTransact.Persistence.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -64,8 +65,8 @@ namespace PayTransact.Controllers
 
         public async Task<IActionResult> Transaction() 
         {
-            var user = await userManager.GetUserAsync(HttpContext.User);
-            var transactions = uow.TransactionRepository.GetAll(filter: u => u.CustomerId.Equals(user.Id));
+            var user = await userManager.GetUserAsync(User);
+            var transactions = uow.TransactionRepository.GetAllTransactionByUser(user.Id);
             return View(transactions);
         }
         public IActionResult TransactionDetails(Guid Id) => View(uow.TransactionRepository.Get(Id));

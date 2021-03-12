@@ -18,6 +18,9 @@ namespace PayTransact.Persistence.Data.Repositories.Implementor
             this.dbContext = dbContext;
         }
 
+        public IEnumerable<Models.Models.Transaction> GetAllTransactionByUser(string customerId)
+            => dbContext.Transactions.Where(x => x.CustomerId.Equals(customerId)).ToList();
+
         public double TotalTransaction(string customerId)
         {
             var cust = dbContext.Transactions.Where(x => x.CustomerId.Equals(customerId));

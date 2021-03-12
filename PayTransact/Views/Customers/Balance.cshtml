@@ -25,7 +25,7 @@
                         @{
                             var user = await _userManager.GetUserAsync(User);
                         }
-                        <input value="@user.FirstName" class="form-control" readonly />
+                        <input value="@user.FullName" class="form-control" readonly />
                         <hr />
                         <div class="">
                             Total Transactions

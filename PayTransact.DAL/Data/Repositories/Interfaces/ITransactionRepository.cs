@@ -9,5 +9,6 @@ namespace PayTransact.Persistence.Data.Repositories.Interfaces
     public interface ITransactionRepository : IGenericRepository<Models.Models.Transaction>
     {
         double TotalTransaction(string customerId);
+        IEnumerable<Models.Models.Transaction> GetAllTransactionByUser(string customerId);
     }
 }

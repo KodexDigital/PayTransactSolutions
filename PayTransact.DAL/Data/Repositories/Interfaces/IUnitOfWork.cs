@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PayTransact.Persistence.Data.Repositories.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IProductRepository ProductRepository { get; }
         IApplicationUserRepository ApplicationUserRepository { get; }
