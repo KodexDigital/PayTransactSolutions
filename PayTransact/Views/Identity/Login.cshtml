@@ -5,23 +5,10 @@
     Layout = "";
 }
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] - Pay Transact</title>
-<link rel="icon" href="~/images/PayTransIcon.ico" type="image/x-icon">
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="~/twitter-bootstrap/css/bootstrap-reboot.css" rel="stylesheet" />
-<link href="~/font-awesome/css/all.css" rel="stylesheet" />
-<link href="~/font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="~/jqueryui/jquery-ui.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/site.css" />
-<link href="~/css/Login.css" rel="stylesheet" />
+<partial name="_AuthHeaderLinksPartial" />
 
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto mt-5 col-md-8">
-   <div class="font-weight-bolder">
-       <h3 style="font-family:'Baskerville Old Face'; font-weight:bolder">PAY TRANSACT SOLUTIONS</h3>
-   </div>
+    <partial name="_AppNameAndStylePartial" />
     <div class="card card0 border-0">
         <div class="row d-flex">
             <div class="col-lg-6">
@@ -43,9 +30,20 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <hr />
-                        <div class="row mb-3 px-3"> <input type="submit" value="Login" class="btn btn-blue" /> </div>
-                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a asp-controller="Identity" asp-action="Register" class="text-danger">Register</a></small> </div>
+                        <div class="row mb-3 px-3"> 
+                            <input type="submit" value="Login" class="btn btn-blue" /> 
+                        </div>
+                        <div class="row mb-1 px-3"> 
+                            <small class="font-weight-bold">Don't have an account? <a asp-controller="Identity" asp-action="Register" class="text-danger">Register</a></small> 
+                        </div>
                     </form>
+                    <div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">PIN</span>
+                            <input type="password" class="form-control" placeholder="Login with PIN">
+                        </div>
+                        <a><small>Set your pin &raquo;</small></a>
+                    </div>
                     @if (ViewBag.Error != null)
                      {
                         <div class="alert alert-danger">

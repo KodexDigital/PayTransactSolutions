@@ -5,23 +5,10 @@
     Layout = "";
 }
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] - Pay Transact</title>
-<link rel="icon" href="~/images/PayTransIcon.ico" type="image/x-icon">
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="~/twitter-bootstrap/css/bootstrap-reboot.css" rel="stylesheet" />
-<link href="~/font-awesome/css/all.css" rel="stylesheet" />
-<link href="~/font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="~/jqueryui/jquery-ui.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/site.css" />
-<link href="~/css/Login.css" rel="stylesheet" />
+<partial name="_AuthHeaderLinksPartial" />
 
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-3 mx-auto col-md-8">
-    <div class="font-weight-bolder">
-        <h3 style="font-family:'Baskerville Old Face'; font-weight:bolder">PAY TRANSACT SOLUTIONS</h3>
-    </div>
+    <partial name="_AppNameAndStylePartial" />
     <div class="card card0 border-0">
         <div class="card1 pb-5">
             <div class="row px-3 justify-content-center border-line mt-3"> <img src="https://i.imgur.com/uNGdWHi.png" class="image"> </div>
@@ -79,7 +66,7 @@
                         <hr />
                         <div class="form-group">
                             <input type="submit" value="Register" class="btn btn-primary rounded" />
-                            <div class="row"> <small class="font-weight-bold">Already have an account? <a asp-controller="Identity" asp-action="Login" class="text-danger">Login</a></small> </div>
+                            <div class="row ml-0"> <small class="font-weight-bold">Already have an account? <a asp-controller="Identity" asp-action="Login" class="text-danger">Login</a></small> </div>
                         </div>
                         @if (ViewBag.Success != null)
                         {

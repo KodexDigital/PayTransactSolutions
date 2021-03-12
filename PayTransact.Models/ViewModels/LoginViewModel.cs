@@ -8,7 +8,7 @@ namespace PayTransact.Models.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "*Email address required.")]
-        [Display(Name = "Username", Prompt = "Enter your email address as username")]
+        [Display(Name = "Username", Prompt = "Email address as username")]
         [EmailAddress(ErrorMessage = @"^Invalid email address supplied.")]
         public string Username { get; set; }
 
