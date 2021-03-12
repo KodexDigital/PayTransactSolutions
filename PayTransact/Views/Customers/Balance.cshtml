@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PayTransact.Models.Models.Transaction>
+@using Microsoft.AspNetCore.Identity
+@using PayTransact.Persistence.DAL
+@using PayTransact.Models.Models
+@inject AppDbContext context
+@inject UserManager<ApplicationUser> _userManager
+
+@{
+    ViewData["Title"] = "Transaction balance";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Transaction balance</h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Customer
+                    </div>
+                    <div class="col-md-6">
+                        @{
+                            var user = await _userManager.GetUserAsync(User);
+                        }
+                        <input value="@user.FirstName" class="form-control" readonly />
+                        <hr />
+                        <div class="">
+                            Total Transactions
+                        </div>
+                        <h3><text>N</text>@ViewData["TotalTransaction"]</h3>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Transaction">Back to Transactions</a>
+    </div>

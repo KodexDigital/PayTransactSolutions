@@ -1,0 +1,77 @@
+﻿@model PayTransact.Models.Models.Transaction
+@using PayTransact.Persistence.DAL
+@inject AppDbContext context
+
+@{
+    ViewData["Title"] = "Transaction details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Transaction details</h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Customer
+                    </div>
+                    <div class="col-md-6">
+                        @{
+                            var customer = context.AppUsers.FirstOrDefault(c => c.Id.Equals(Model.CustomerId)).FirstName;
+                        }
+                        <input value="@customer" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Product
+                    </div>
+                    <div class="col-md-6">
+                        @{
+                            var prodcut = context.Products.FirstOrDefault(c => c.Id.Equals(Model.ProductId)).Name;
+                        }
+                        <input value="@prodcut" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Invested amount
+                    </div>
+                    <div class="col-md-6">
+                        <text>N</text><input asp-for="InvestedAmount" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Date of payment
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="DateOfPayment" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        Transaction number
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="TransactionNumber" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                       Created date
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="CreatedAt" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Transaction">Back to Transactions</a>
+    </div>
+</div>
